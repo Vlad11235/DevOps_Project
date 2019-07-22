@@ -27,7 +27,7 @@ pipeline {
                 steps {
                     echo "============== start testing =================="
                     sh " result='curl -Is http://localhost:8000/login | head -1'"
-                    echo $result
+                    sh  "echo $result"
                     echo "============== Test Finished ================== "
                 }
             }
