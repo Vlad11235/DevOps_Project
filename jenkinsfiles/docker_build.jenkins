@@ -22,18 +22,29 @@ pipeline {
                 }
             }
         }
-        stage{
-            stage("Test") {
+        
+        stage("Test") {
                 steps {
                     echo "============== start testing =================="
                     sh " result='curl -Is http://localhost:8000/login | head -1'"
                     echo $result
-                   
+                    sh   "if ["$result" = "HTTP/1.1 200 OK"]
+                         then
+                            echo "Test Passed"
+                         else
+                            echo "Test Failed"
+                         fi"
                     echo "============== Test Finished ================== "
                 }
             }
+        stage("Deploy") {
+                steps {
+                    echo "============== start Deploy =================="
+                    
+                }
+            }
+
         }
 
        
-    }
 }
