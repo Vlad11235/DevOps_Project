@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage("create docker image") {
             steps {
-                echo " ============== start building image =================="
+                echo "============== start building image =================="
                 sh "ls -la ${pwd()}"
                 dir ('docker') {
                 	sh 'docker build -t blog:latest . '
@@ -22,6 +22,32 @@ pipeline {
                 }
             }
         }
+        stage{
+            stage("Test") {
+                steps {
+                    echo "============== start testing =================="
+                    sh " result='curl -Is http://localhost:8000/login | head -1'
+                         echo $result
+                         if ["$result" = "HTTP/1.1 200 OK"]
+                         then
+                            echo "Test Passed"
+                         else
+                            echo "Test Failed"
+                         fi"
+                    echo "============== Test Finished ================== "
+                }
+            }
+        }
+        stage{
+            stage("Deploy") {
+                steps {
+                    echo "============== start Deploy =================="
+                    
+                }
+            }
+
+        }
+
        
     }
 }
