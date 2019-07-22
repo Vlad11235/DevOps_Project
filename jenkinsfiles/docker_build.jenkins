@@ -1,0 +1,26 @@
+#!groovy
+
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        label 'master'
+        }
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("create docker image") {
+            steps {
+                echo " ============== start building image =================="
+                sh "ls -la ${pwd()}"
+                dir ('docker') {
+                	sh 'docker build -t blog:latest . '
+                }
+            }
+        }
+       
+    }
+}
