@@ -18,7 +18,7 @@ pipeline {
                 sh "ls -la ${pwd()}"
                 dir ('docker') {
                 	sh 'docker build -t blog:latest . '
-                    sh  'docker run --name blog -d -p 8000:5000 --rm blog:latest'
+                    sh 'docker run --name blog -d -p 8000:5000 --rm blog:latest'
                 }
             }
         }
