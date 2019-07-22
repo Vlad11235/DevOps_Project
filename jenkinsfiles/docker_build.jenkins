@@ -32,14 +32,6 @@ pipeline {
                     echo "============== Test Finished ================== "
                 }
             }
-        stage{
-            stage("Deploy") {
-                steps {
-                    echo "============== start Deploy =================="
-                    
-                }
-            }
-
         }
 
        
