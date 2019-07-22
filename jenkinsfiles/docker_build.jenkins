@@ -22,6 +22,26 @@ pipeline {
                 }
             }
         }
+        stage{
+            stage("Test") {
+                steps {
+                    echo "============== start testing =================="
+                    sh " result='curl -Is http://localhost:8000/login | head -1'"
+                    echo $result
+                   
+                    echo "============== Test Finished ================== "
+                }
+            }
+        stage{
+            stage("Deploy") {
+                steps {
+                    echo "============== start Deploy =================="
+                    
+                }
+            }
+
+        }
+
        
     }
 }
