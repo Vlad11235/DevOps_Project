@@ -28,7 +28,7 @@ pipeline {
                     script{    
                           try {
                                 sh "curl -Is http://localhost:8000/login | grep '200'"
-                                return true
+                                echo "Yeah"
                           } catch (Exception e) {
                                 return false
                           }
