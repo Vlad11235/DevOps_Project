@@ -26,7 +26,7 @@ pipeline {
                 steps {
                   echo "============== start testing =================="
                   waitUntil {
-                  try {
+                    try {
                       sh "curl -Is http://localhost:8000/login | grep '200'"
                       return true
                   } catch (Exception e) {
