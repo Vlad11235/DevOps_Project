@@ -17,37 +17,55 @@ pipeline {
                 sh "ls -la ${pwd()}"
                 dir ('docker') {
                 	sh 'docker build -t blog:latest . '
-                    sh 'docker run --name blog -d -p 8000:5000 --rm blog:latest'
+                    
                 }
             }
         }
-        
-        stage("Test") {
+
+        stage("Deploy") {
+            steps {
+                echo "============== Start Deploy  =================="
+
+                sh "docker push jake1788/blog:latest"
+
+                sh "oc login --token=E-DliQd9ncIVswYN_503SoWbM_HGhIRK5GfjRcLewng --server=https://api.us-west-2.online-starter.openshift.com:6443"
+                
+                sh "oc new-app jake1788/blog:latest" 
+
+                sh "oc expose svc blog"
+
+                sh "oc status"
+
+                
+                echo "============== Deploy Finished ==============="
+                
+            }
+        }
+         stage("Test") {
                 steps {
                   echo "============== start testing =================="
-                    script{    
-                          try {
-                                sh "curl -Is http://localhost:8000/login | grep '200'"
-                                echo "Yeah"
-                                return true 
+
+                   script{    
+                        try {
+                                sh "curl -Is http://blog-blog1.apps.us-west-2.online-starter.openshift.com/login | grep '200'"
+                                
+                            return true 
                           } catch (Exception e) {
                                 return false
                           }
                     }
+                   
                    echo "============== Test Finished =================="
            }
-               
-            }
-        stage("Deploy") {
-                steps {
-                    echo "============== start Deploy =================="
-                    
-                    echo "============== Deploy Finished ================== "
-                    
-                }
-            }
 
         }
+      
+               
+            
+
+    }
+    
+        
 
        
 }
