@@ -18,7 +18,7 @@ pipeline {
                 dir ('docker') {
                 	 sh 'docker build -t blog:latest . '
                      sh "docker tag blog latest"
-                    sh "docker login -u jake1788 "
+                    sh "docker login -u jake1788 -p pass1234"
                     sh "docker push jake1788/blog:latest"
                    
                 }
