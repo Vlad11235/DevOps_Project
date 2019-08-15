@@ -28,7 +28,7 @@ pipeline {
                 script{
                  try {
                             sh "curl -Is http://blog-blog1.apps.us-west-2.online-starter.openshift.com/login | grep '200'"  
-                            sh "oc login --token=E-DliQd9ncIVswYN_503SoWbM_HGhIRK5GfjRcLewng --server=https://api.us-west-2.online-starter.openshift.com:6443"
+                            sh "oc login --token=8rjn6F4g9zBO_KFHUWTmCG0XplLC1CRyGS8fc8o9-_o --server=https://api.us-west-2.online-starter.openshift.com:6443"
                             sh "oc delete pods,services,deploymentconfigs --all"
                       } catch (Exception e) {
                                 return true
@@ -37,7 +37,7 @@ pipeline {
             
                 sh "docker push jake1788/blog:latest"
 
-                sh "oc login --token=E-DliQd9ncIVswYN_503SoWbM_HGhIRK5GfjRcLewng --server=https://api.us-west-2.online-starter.openshift.com:6443"
+                sh "oc login --token=8rjn6F4g9zBO_KFHUWTmCG0XplLC1CRyGS8fc8o9-_o --server=https://api.us-west-2.online-starter.openshift.com:6443"
                 
                 sh "oc new-app jake1788/blog:latest" 
 
