@@ -45,7 +45,7 @@ pipeline {
                 
                 sh "oc new-app jake1788/blog:latest" 
 
-                sh "oc expose svc blog"
+              
 
               
 
