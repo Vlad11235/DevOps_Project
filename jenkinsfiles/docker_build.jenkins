@@ -17,7 +17,7 @@ pipeline {
                 sh "ls -la ${pwd()}"
                 dir ('docker') {
                 	sh 'docker build -t blog:latest . '
-                    
+                    sh "docker push jake1788/blog:latest"
                 }
             }
         }
@@ -26,18 +26,19 @@ pipeline {
             steps {
                 echo "============== Start Deploy  =================="
                 script{
+                     sh "oc login --token=8rjn6F4g9zBO_KFHUWTmCG0XplLC1CRyGS8fc8o9-_o --server=https://api.us-west-2.online-starter.openshift.com:6443"
                  try {
                             sh "curl -Is http://blog-blog1.apps.us-west-2.online-starter.openshift.com/login | grep '200'"  
-                            sh "oc login --token=8rjn6F4g9zBO_KFHUWTmCG0XplLC1CRyGS8fc8o9-_o --server=https://api.us-west-2.online-starter.openshift.com:6443"
+                            
                             sh "oc delete pods,services,deploymentconfigs --all"
                       } catch (Exception e) {
                                 return true
                           }
                 }
             
-                sh "docker push jake1788/blog:latest"
+               
 
-                sh "oc login --token=8rjn6F4g9zBO_KFHUWTmCG0XplLC1CRyGS8fc8o9-_o --server=https://api.us-west-2.online-starter.openshift.com:6443"
+               
                 
                 sh "oc new-app jake1788/blog:latest" 
 
