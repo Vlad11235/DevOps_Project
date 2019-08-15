@@ -47,7 +47,7 @@ pipeline {
 
                 sh "oc expose svc blog"
 
-                sh "oc status"
+              
 
                 
                 echo "============== Deploy Finished ==============="
