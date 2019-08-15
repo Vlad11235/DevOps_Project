@@ -17,6 +17,7 @@ pipeline {
                 sh "ls -la ${pwd()}"
                 dir ('docker') {
                 	sh 'docker build -t blog:latest . '
+                    sh "docker login -u jake1788 -p Brauberg401834"
                     sh "docker push jake1788/blog:latest"
                 }
             }
