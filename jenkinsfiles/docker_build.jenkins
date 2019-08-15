@@ -62,7 +62,7 @@ pipeline {
                        waitUntil{
                         try {
                                 sh "curl -Is http://blog-blog1.apps.us-west-2.online-starter.openshift.com/login | grep '200'"
-                                
+                                echo "Test passed"
                             return true 
                           } catch (Exception e) {
                                 sleep(10)
