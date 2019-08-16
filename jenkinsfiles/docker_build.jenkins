@@ -67,6 +67,7 @@ pipeline {
                             return true 
                           } catch (Exception e) {
                                 sleep(10)
+                                echo "Test failed"
                                 return false
                           }
                        }
